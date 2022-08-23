@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_wars_app/src/pages/website/widgets/website_body.dart';
 
 class WebsitePage extends StatelessWidget {
   const WebsitePage({Key? key}) : super(key: key);
@@ -6,7 +7,7 @@ class WebsitePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('Website Page')),
+      body: WebsiteBody(),
     );
   }
 }
