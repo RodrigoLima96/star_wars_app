@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:star_wars_app/src/controllers/characters_page_controller.dart';
 import 'package:star_wars_app/src/controllers/movies_page_controller.dart';
 import 'package:star_wars_app/src/pages/home/home_page.dart';
 import 'package:star_wars_app/src/repository/movies_repository.dart';
@@ -20,6 +21,8 @@ class MyApp extends StatelessWidget {
                 MoviesRepository(context.read(), context.read())),
         ChangeNotifierProvider(
             create: (context) => MoviesPageController(context.read())),
+        ChangeNotifierProvider(
+            create: (context) => CharactersPageController(context.read())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

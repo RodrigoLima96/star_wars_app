@@ -12,4 +12,15 @@ class MoviesService {
       return moviesList;
     }
   }
+
+  Future<dynamic> getCharactersList() async {
+    String uri = 'https://swapi.dev/api/people/';
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final List<dynamic> charactersList = json['results'];
+      return charactersList;
+    }
+  }
 }
