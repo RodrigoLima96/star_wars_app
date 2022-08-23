@@ -71,38 +71,40 @@ class _HomeBodyState extends State<HomeBody> {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TabButton(
-                  text: 'Filmes',
-                  pageIndex: 0,
-                  selectedPage: _selectedPage,
-                  press: () {
-                    _changePage(0);
-                  },
+          _selectedPage >= 3
+              ? const SizedBox()
+              : Container(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TabButton(
+                        text: 'Filmes',
+                        pageIndex: 0,
+                        selectedPage: _selectedPage,
+                        press: () {
+                          _changePage(0);
+                        },
+                      ),
+                      TabButton(
+                        text: 'Personagens',
+                        pageIndex: 1,
+                        selectedPage: _selectedPage,
+                        press: () {
+                          _changePage(1);
+                        },
+                      ),
+                      TabButton(
+                        text: 'Favoritos',
+                        pageIndex: 2,
+                        selectedPage: _selectedPage,
+                        press: () {
+                          _changePage(2);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                TabButton(
-                  text: 'Personagens',
-                  pageIndex: 1,
-                  selectedPage: _selectedPage,
-                  press: () {
-                    _changePage(1);
-                  },
-                ),
-                TabButton(
-                  text: 'Favoritos',
-                  pageIndex: 2,
-                  selectedPage: _selectedPage,
-                  press: () {
-                    _changePage(2);
-                  },
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),

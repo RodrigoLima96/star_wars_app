@@ -1,30 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:star_wars_app/src/controllers/movies_page_controller.dart';
 import 'package:star_wars_app/src/models/movie.dart';
 import 'package:star_wars_app/src/shared/app_list_tile.dart';
 
-class MoviesBody extends StatelessWidget {
+class MoviesBody extends StatefulWidget {
   const MoviesBody({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final List<Movie> movies = [
-      Movie(title: 'A New Hope', id: '1'),
-      Movie(title: 'Return of the Jedi', id: '2'),
-    ];
+  State<MoviesBody> createState() => _MoviesBodyState();
+}
 
-    return SingleChildScrollView(
-      child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          return AppListTile(
-            text: movies[index].title,
-            isFavorite: movies[index].isFavorite!,
-            function: () {},
+class _MoviesBodyState extends State<MoviesBody> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<MoviesPageController>().getMoviesList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = context.watch<MoviesPageController>();
+
+    return controller.state == MoviesPageState.loading
+        ? const Center(child: CircularProgressIndicator())
+        : SingleChildScrollView(
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.movies.length,
+              itemBuilder: (context, index) {
+                final List<Movie> movies = controller.movies;
+
+                return AppListTile(
+                  text: movies[index].title,
+                  isFavorite: movies[index].isFavorite!,
+                  function: () {},
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
   }
 }

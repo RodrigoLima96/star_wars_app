@@ -30,6 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.1.4
+  http: ^0.13.5
+  provider: ^6.0.3
   
 
 
