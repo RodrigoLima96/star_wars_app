@@ -7,10 +7,11 @@ class Movie {
     isFavorite = isFavorite ?? false;
   }
 
-  factory Movie.fromMap(Map<String, dynamic> map) {
+  factory Movie.fromMap(Map<String, dynamic> map, bool favorite) {
     return Movie(
       title: map['title'] ?? '',
       id: map['episode_id'].toString(),
+      isFavorite: favorite,
     );
   }
 }

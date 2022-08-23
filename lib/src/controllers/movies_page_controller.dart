@@ -27,4 +27,19 @@ class MoviesPageController extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  insertOrDeleteFavorite({
+    required String id,
+    required int index,
+    required String name,
+  }) async {
+    try {
+      await _moviesRepository.insertOrDeleteFavorite(true, id, name);
+
+      movies[index].isFavorite = !movies[index].isFavorite!;
+      notifyListeners();
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
 }

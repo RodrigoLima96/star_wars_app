@@ -37,7 +37,13 @@ class _MoviesBodyState extends State<MoviesBody> {
                 return AppListTile(
                   text: movies[index].title,
                   isFavorite: movies[index].isFavorite!,
-                  function: () {},
+                  function: () {
+                    controller.insertOrDeleteFavorite(
+                      id: movies[index].id,
+                      index: index,
+                      name: movies[index].title,
+                    );
+                  },
                 );
               },
             ),
