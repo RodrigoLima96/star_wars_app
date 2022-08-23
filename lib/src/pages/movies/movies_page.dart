@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_wars_app/src/pages/movies/widgets/movies_body.dart';
 
 class MoviesPage extends StatelessWidget {
   const MoviesPage({Key? key}) : super(key: key);
@@ -6,7 +7,7 @@ class MoviesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('Movies Page')),
+      body: MoviesBody(),
     );
   }
 }
