@@ -26,18 +26,28 @@ class _FavoritesBodyState extends State<FavoritesBody> {
 
     return controller.state == FavoritePageState.loading
         ? const Center(child: CircularProgressIndicator())
-        : SingleChildScrollView(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: controller.favorites.length,
-              itemBuilder: (context, index) {
-                final List<Favorite> favorite = controller.favorites;
-                final bool isMovie = favorite[index].type == 'movie';
-                return FavoriteTile(
-                    text: favorite[index].name, isMovie: isMovie);
-              },
-            ),
-          );
+        : controller.favorites.isNotEmpty
+            ? SingleChildScrollView(
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: controller.favorites.length,
+                  itemBuilder: (context, index) {
+                    final List<Favorite> favorite = controller.favorites;
+                    final bool isMovie = favorite[index].type == 'movie';
+                    return FavoriteTile(
+                        text: favorite[index].name, isMovie: isMovie);
+                  },
+                ),
+              )
+            : const Center(
+                child: Text(
+                  'Sem favoritos ainda...',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
   }
 }
