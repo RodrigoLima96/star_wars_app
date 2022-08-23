@@ -1,4 +1,5 @@
 import 'package:star_wars_app/src/models/character.dart';
+import 'package:star_wars_app/src/models/favorite.dart';
 import 'package:star_wars_app/src/models/movie.dart';
 import 'package:star_wars_app/src/services/favorite_service.dart';
 import 'package:star_wars_app/src/services/movies_service.dart';
@@ -56,6 +57,20 @@ class MoviesRepository {
     }
 
     return characters;
+  }
+
+  Future<List<Favorite>> getFavorites() async {
+    final List<Favorite> favorites = [];
+
+    var db = await _favoriteService.database;
+
+    List favoriteList = await db.query('favorites');
+
+    for (var favorite in favoriteList) {
+      favorites.add(Favorite.fromMap(favorite));
+    }
+
+    return favorites;
   }
 
   Future<void> insertOrDeleteFavorite(
